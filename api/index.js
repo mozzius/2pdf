@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
             url = 'https://' + url;
         }
         const pdf = await getPDF(url);
-        res.set('Content-Type', 'application/pdf');
+        res.setHeader('Content-Type', 'application/pdf');
         res.status(200).send(pdf);
     } catch (e) {
         res.setHeader('Content-Type', 'text/html');
