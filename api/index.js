@@ -1,19 +1,4 @@
-const chrome = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
-
-const getPDF = async (url) => {
-    const browser = await puppeteer.launch({
-        args: chrome.args,
-        executablePath: await chrome.executablePath,
-        headless: chrome.headless,
-    });
-
-    const page = await browser.newPage();
-    await page.goto(url);
-    const file = await page.pdf();
-    await browser.close();
-    return file;
-}
+const getPDF = require("./pdf");
 
 module.exports = async (req, res) => {
     const { pathname = '/' } = parse(req.url, true);
