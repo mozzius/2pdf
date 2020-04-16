@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
     if (!url.startsWith('http')) {
         url = 'https://' + url;
     }
+    console.log(url);
     try {
         const pdf = await getPDF(url);
         res.statusCode = 200;
