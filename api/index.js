@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
         res.status(200).send(pdf);
     } catch (e) {
         res.setHeader('Content-Type', 'text/html');
-        res.status(500).end('<h1>Server Error</h1><p>Sorry, there was a problem</p>');
+        res.status(500).end(`<h1>Server Error</h1><p>Sorry, there was a problem</p><pre>${e.message}</pre>`);
         console.error(e.message);
     }
 };
