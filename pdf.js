@@ -10,7 +10,7 @@ module.exports = async (url) => {
 
     const page = await browser.newPage();
     await page.goto(url);
-    const file = await page.pdf();
+    const file = await page.title();
     await browser.close();
     return file;
 }
