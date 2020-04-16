@@ -9,7 +9,9 @@ module.exports = async (req, res) => {
         }
         const pdf = await getPDF(url);
         res.status(200).send(pdf);
-    } catch {
-        res.sendStatus(500);
+    } catch (e) {
+        res.setHeader('Content-Type', 'text/html');
+        res.status(500).end('<h1>Server Error</h1><p>Sorry, there was a problem</p>');
+        console.error(e.message);
     }
 };
