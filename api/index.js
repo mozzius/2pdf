@@ -7,8 +7,7 @@ module.exports = async (req, res) => {
         url = 'https://' + url;
     }
     const pdf = await getPDF(url);
-    const stream = await pdf.toStream();
     res.statusCode = 200;
     res.set('Content-type', 'application/pdf');
-    stream.pipe(res)
+    res.end(pdf);
 };
