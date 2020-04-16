@@ -1,4 +1,4 @@
-const getPDF = require("./pdf");
+const getPDF = require("../pdf");
 
 module.exports = async (req, res) => {
     const { pathname = '/' } = parse(req.url, true);
@@ -9,9 +9,8 @@ module.exports = async (req, res) => {
     console.log(url);
     try {
         const pdf = await getPDF(url);
-        res.statusCode = 200;
         res.set('Content-type', 'application/pdf');
-        res.end(pdf);
+        res.status(200).send(pdf);
     } catch {
         res.sendStatus(500);
     }
