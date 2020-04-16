@@ -1,14 +1,17 @@
 const getPDF = require("./pdf");
 
 module.exports = async (req, res) => {
-    const { pathname = '/', query = {} } = parse(req.url, true);
-    const { type = 'png' } = query; // png or jpeg
+    const { pathname = '/' } = parse(req.url, true);
     let url = pathname.slice(1);
     if (!url.startsWith('http')) {
-        url = 'https://' + url; // add protocol if missing
+        url = 'https://' + url;
     }
-    const file = await getScreenshot(url, type);
-    res.statusCode = 200;
-    res.setHeader('Content-Type', `image/${type}`);
-    res.end(file);
+    try {
+        const pdf = await getPDF(url);
+        res.statusCode = 200;
+        res.set('Content-type', 'application/pdf');
+        res.end(pdf);
+    } catch {
+        res.sendStatus(500);
+    }
 };
